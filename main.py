@@ -35,14 +35,14 @@ cribs = config.get('funcionamento', 'cribs')
 cribs = trata_cribs(cribs)
 
 if __name__ == '__main__':
-    ontem = '2022-04-23'  # (datetime.today() - timedelta(days=1)).strftime('%Y-%m-%d')
-    anteontem = '2022-04-22'  # (datetime.today() - timedelta(days=2)).strftime('%Y-%m-%d')
+    ontem = (datetime.today() - timedelta(days=1)).strftime('%Y-%m-%d')  #'2022-05-23'  #
+    anteontem = (datetime.today() - timedelta(days=2)).strftime('%Y-%m-%d')  #'2022-05-22'  #
 
     '''TREAD'''
     nodrops = find_nodrop.GetNoDrop(cribs, ontem, anteontem)
-    # nodrops.select_nodrops()
-    # nodrops.get_trans_nodrops()
+    print(len(nodrops.dict_nodrops))
     print(nodrops.dict_nodrops)
+    print(nodrops.list_cancel)
 
     # Create_files.Cria_Arquivos(dados, pasta_prontos, pasta_crib)
 

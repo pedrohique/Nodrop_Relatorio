@@ -1,7 +1,9 @@
+import pandas as pd
 import pyodbc
 import cryptocode
 import configparser
 import logging
+import pandas
 
 config = configparser.ConfigParser()
 config.read('config.ini')
@@ -22,6 +24,7 @@ class GetNoDropWorker:
 
         self.list_eventlog_base = []  # lista de nodrops unicos
         self.list_eventlog = []  # lista de nodrops totais
+        self.list_cancel = []
         self.dict_nodrops = {}  # dicionario de dados com todas as transações que precisam ser canceladas.
         self.soma_nodrops = 0  # soma o numero de nodrops
         self.soma_cancelamentos = 0  # soma o numero de transações que foram canceladas manualmente
@@ -51,11 +54,16 @@ class GetNoDropWorker:
         """O Objetivo desta classe é retornar uma lista dos nodrops unicos que serão analsados no proximo metodo"""
 
         def remove_repetidos(lista):  # retorna uma lista de nodrops unicos
-            lista_unica = []
-            for valor in lista:
-                if valor not in lista_unica:
-                    lista_unica.append(valor)
-            lista_unica.sort()
+            # lista_unica = []
+            # for valor in lista:
+            #     if valor not in lista_unica:
+            #         lista_unica.append(valor)
+            # lista_unica.sort()
+            df = pd.DataFrame(lista, columns=['employee', 'cribbin', 'crib', 'eventlogdate'])
+            df.sort_values(by=['crib'])
+            df = df.drop_duplicates()
+            lista_unica = df.values.tolist()
+
             return lista_unica
 
         logging.info('Iniciando pesquisa de nodrops')
@@ -81,28 +89,19 @@ class GetNoDropWorker:
 
         self.list_eventlog_base = remove_repetidos(
             self.list_eventlog)  # remove nodrops repetidos para realizar a contagem a baixo
-
+        print(self.list_eventlog_base)
     def select_trans_nodrop(self, employee, cribbin, canceltodo):  # seleciona todas as trans especificadas no nodrop
         #try:
-            self.cursor.execute(
-                "select t.transnumber, s.crib, s.bin, t.item, e.ID, t.Transdate, t.quantity, t.TypeDescription,"
-                "e.User1, e.User2, t.binqty "
-                "from trans t with(nolock)"
-                "join EMPLOYEE e (nolock) on t.IssuedTo = e.ID"
-                "join INVENTRY  i (nolock) on i.ItemNumber = t.Item"
-                "join STATION s (nolock) on s.CribBin = t.CribBin"
-                f"where employee = '{employee}' and TypeDescription = 'ISSUE'"
-                f"and transdate >= CONVERT(datetime, '{self.anteontem}T00:00:00') and Status IS NULL")
+            self.cursor.execute(f"select t.transnumber, s.crib, s.bin,"
+                                f" t.item, e.ID, t.Transdate, t.quantity, t.TypeDescription,"
+                                f" e.User1, e.User2, t.binqty from trans t with(nolock)"
+                                f" join EMPLOYEE e (nolock) on t.IssuedTo = e.ID "
+                                f"join INVENTRY  i (nolock) on i.ItemNumber = t.Item "
+                                f"join STATION s (nolock) on s.CribBin = t.CribBin "
+                                f"where t.IssuedTo = '{employee}' and TypeDescription = 'ISSUE' "
+                                f"and transdate >= CONVERT(datetime, '{self.anteontem}T00:00:00') and Status IS NULL and t.CribBin = '{cribbin}'")
 
-                '''select novo apresentando problemas, precisa atualizar ele para trazer o centro de custo e funlão do emplyee e testar'''
-
-                # f"select transnumber, crib, bin, item, employee, Transdate, quantity, TypeDescription,"
-                # f" User1, User2, binqty "
-                # f"from Trans"
-                # f" where employee = '{employee}' and TypeDescription = 'ISSUE' and CribBin = '{cribbin}'"
-                # f" and transdate >= CONVERT(datetime, '{self.anteontem}T00:00:00') and Status IS NULL")
             transacoes = self.cursor.fetchall()
-            print(employee, cribbin)
             list_trans_nodrop = []  # lista de transações possiveis para o nodrop vai retornar sempre o total possivel
             contador = 0
             for trans in transacoes:  # procura as transações no dia de ontem
@@ -122,9 +121,11 @@ class GetNoDropWorker:
                 contador += contador + 1
 
                 if transdate_limpo == self.ontem:
-                    list_trans_nodrop.append(
-                        f'{transnumber}, {crib}, {bin}, {item}, {employee_trans}, {transdate}, {quantity},'
-                        f' {typedesc},{user1}, {user2}, {binqty},NAO QUEDA')
+                    modelo = f'{transnumber}, {crib}, {bin}, {item}, {employee_trans}, {transdate}, {quantity}, {typedesc},{user1}, {user2}, {binqty},NAO QUEDA'
+                    if modelo not in list_trans_nodrop:
+                        list_trans_nodrop.append(
+                            f'{transnumber}, {crib}, {bin}, {item}, {employee_trans}, {transdate}, {quantity},'
+                            f' {typedesc},{user1}, {user2}, {binqty},NAO QUEDA')
 
             if len(list_trans_nodrop) == 0:  # Caso não encontre verifica se as transações estão na data de ante ontem
                 for trans in transacoes:
@@ -141,16 +142,18 @@ class GetNoDropWorker:
                     user2 = trans[9]
                     binqty = trans[10]
                     if transdate_limpo == self.anteontem:
-                        list_trans_nodrop.append(
-                            f'{transnumber}, {crib}, {bin}, {item}, {employee_trans}, {transdate},'
-                            f' {quantity}, {typedesc},{user1}, {user2}, {binqty},NAO QUEDA')
+                        modelo = f'{transnumber}, {crib}, {bin}, {item}, {employee_trans}, {transdate}, {quantity}, {typedesc},{user1}, {user2}, {binqty},NAO QUEDA'
+                        if modelo not in list_trans_nodrop:
+                            list_trans_nodrop.append(
+                                f'{transnumber}, {crib}, {bin}, {item}, {employee_trans}, {transdate},'
+                                f' {quantity}, {typedesc},{user1}, {user2}, {binqty},NAO QUEDA')
             logging.info('transações de nodrop selecionadas com sucesso.')
             if len(list_trans_nodrop) >= canceltodo:
                 return list_trans_nodrop[
                        :canceltodo]  # ADICIONADO O INDEX, AGORA SE POSSUI 2 NODROPS A SER FEITO ELE VAI ADICIONAR
                 # NA LISTA E RETORNAR DE ACORDO COM A QUANTIDADE DE NODROP
             else:
-                return list_trans_nodrop[0]
+                return []
 
 
         # except:
@@ -160,12 +163,20 @@ class GetNoDropWorker:
 
         def count_cancel(cursor, unic_employee, unic_cribin, ontem):
             """Verfica quantos nodrops ja foram realzados para aquele nodrop unico"""
-            cursor.execute(
-                f"select transnumber, RelatedKey, crib, bin, item, employee, Transdate, quantity,"
-                f" TypeDescription, User1, User2, binqty "
-                f"from Trans where issuedto = '{unic_employee}' and TypeDescription = 'CANCL' and"
-                f" CribBin = '{unic_cribin}' and transdate >= CONVERT(datetime, '{ontem}T00:00:00') ")
+            cursor.execute(f"select t.transnumber, s.crib, s.bin,"
+                                f" t.item, e.ID, t.Transdate, t.quantity, t.TypeDescription,"
+                                f" e.User1, e.User2, t.binqty from trans t with(nolock)"
+                                f" join EMPLOYEE e (nolock) on t.IssuedTo = e.ID "
+                                f"join INVENTRY  i (nolock) on i.ItemNumber = t.Item "
+                                f"join STATION s (nolock) on s.CribBin = t.CribBin "
+                                f"where t.IssuedTo = '{unic_employee}' and TypeDescription = 'CANCL' "
+                                f"and transdate >= CONVERT(datetime, '{ontem}T00:00:00') and t.CribBin = '{unic_cribin}'")
+                # f"select transnumber, RelatedKey, crib, bin, item, employee, Transdate, quantity,"
+                # f" TypeDescription, User1, User2, binqty "
+                # f"from Trans where issuedto = '{unic_employee}' and TypeDescription = 'CANCL' and"
+                # f" CribBin = '{unic_cribin}' and transdate >= CONVERT(datetime, '{ontem}T00:00:00') ")
             transacoes = cursor.fetchall()
+            self.list_cancel.append(transacoes)
             return len(transacoes)
 
         for nodrop_unic in self.list_eventlog_base:
@@ -184,7 +195,7 @@ class GetNoDropWorker:
                 trans_correta = self.select_trans_nodrop(employee, cribin, cancl_to_do)
                 # caso a transação ja tenha sido cancelada manualmente ela vai retornar none
                 cancl_to_do -= 1  # diminui a quantidade de nodrops que não foram realizados
-                if trans_correta is not None:
+                if len(trans_correta) > 0:
                     self.soma_trans += 1  # soma o numero de transações que foram canceladas pelo sistema
                     for trans in trans_correta:
                         '''adiciona a transação no dicionario'''
@@ -202,12 +213,10 @@ class GetNoDropWorker:
                         if user1 == 'None':
                             user1 = 'NA'
                         user2 = trans[9].replace(' ', '')
-                        print(user2)
                         if user2 == 'None':
-                            print(user2)
                             user2 = 'NA'
                         binqty = trans[10].replace(' ', '')
-                        # print(trans)
+                        print(transnumber)
                         self.dict_nodrops[transnumber] = [str(crib), bin, item, employee, str(Transdate), str(quantity),
                                                      TypeDescription, user1, user2, binqty]
                 else:
@@ -218,7 +227,7 @@ class GetNoDropWorker:
                 f'Nodrops encontrados: {self.soma_nodrops}, Cancl encontrados: {self.soma_cancelamentos},Nodrops possiveis: {self.soma_trans_true}, total de cancelamentos efetuados: {self.soma_trans}, quantidade de transações que não foram encontradas : {self.soma_unfind}')
             print(
                 f'Nodrops encontrados: {self.soma_nodrops}, Cancl encontrados: {self.soma_cancelamentos},Nodrops possiveis: {self.soma_trans_true}, total de cancelamentos efetuados: {self.soma_trans}, quantidade de transações que não foram encontradas : {self.soma_unfind}')
-
+            print('----------------------------------------------------------')
 
 class GetNoDrop(GetNoDropWorker):
     def __init__(self, cribs, ontem, anteontem):
