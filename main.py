@@ -1,6 +1,6 @@
 from corpo import find_nodrop
 
-from datetime import datetime, date, timedelta
+from datetime import datetime, timedelta
 import time
 import logging
 import configparser
@@ -35,14 +35,14 @@ cribs = config.get('funcionamento', 'cribs')
 cribs = trata_cribs(cribs)
 
 if __name__ == '__main__':
-    ontem = (datetime.today() - timedelta(days=1)).strftime('%Y-%m-%d')  #'2022-05-23'  #
-    anteontem = (datetime.today() - timedelta(days=2)).strftime('%Y-%m-%d')  #'2022-05-22'  #
+    ontem: str = (datetime.today() - timedelta(days=1)).strftime('%Y-%m-%d')  # '2022-05-23'  #
+    anteontem: str = (datetime.today() - timedelta(days=2)).strftime('%Y-%m-%d')  # '2022-05-22'  #
 
     '''TREAD'''
     nodrops = find_nodrop.GetNoDrop(cribs, ontem, anteontem)
     print(len(nodrops.dict_nodrops))
     print(nodrops.dict_nodrops)
-    print(nodrops.list_cancel)
+    print(nodrops.dict_cancl)
 
     # Create_files.Cria_Arquivos(dados, pasta_prontos, pasta_crib)
 
