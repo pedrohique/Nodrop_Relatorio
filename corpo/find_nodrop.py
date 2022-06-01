@@ -3,7 +3,6 @@ import pyodbc
 import cryptocode
 import configparser
 import logging
-import pandas
 
 config = configparser.ConfigParser()
 config.read('config.ini')
@@ -98,7 +97,8 @@ class GetNoDropWorker:
                             f"join INVENTRY  i (nolock) on i.ItemNumber = t.Item "
                             f"join STATION s (nolock) on s.CribBin = t.CribBin "
                             f"where t.IssuedTo = '{employee}' and TypeDescription = 'ISSUE' "
-                            f"and transdate BETWEEN CONVERT(datetime, '{self.anteontem}T22:00:00') AND CONVERT(datetime, '{self.ontem}T23:59:59') "
+                            f"and transdate BETWEEN CONVERT(datetime, '{self.anteontem}T22:00:00')"
+                            f" AND CONVERT(datetime, '{self.ontem}T23:59:59') "
                             f"and Status IS NULL and t.CribBin = '{cribbin}'")
 
         transacoes = self.cursor.fetchall()
@@ -237,7 +237,9 @@ class GetNoDropWorker:
         """Trata as informações de cancels criadas pela função count cancel dentro do metodo get_trans_nodrop"""
         for cancl in self.list_cancel:
             for canc in cancl:
-                # print(cancl[0][0], cancl[0][1], cancl[0][2], cancl[0][3], cancl[0][4], cancl[0][5], cancl[0][6], cancl[0][7], cancl[0][8], cancl[0][9], cancl[0][10])
+                # print(cancl[0][0], cancl[0][1], cancl[0][2], cancl[0][3],
+                # cancl[0][4], cancl[0][5], cancl[0][6], cancl[0][7], cancl[0][8], cancl[0][9]
+                # , cancl[0][10])
                 transnumber = canc[0]
                 crib = canc[1]
                 bin = canc[2].replace(' ', '')
@@ -324,6 +326,7 @@ class GetNoDropWorker:
                 self.dict_cancl_nomot[transnumber] = [str(crib), bin, item, employee, str(Transdate), str(quantity),
                                                       TypeDescription, user1, user2, binqty]
         print(self.dict_cancl_nomot)
+
     def trata_relat(self):
         def altera_dados():
             for trans in self.dict_nodrops.keys():
