@@ -1,20 +1,99 @@
-01/06/2022 05:28:20 PM - INFO:conexão com o banco de dados efetuada com sucesso.
-01/06/2022 05:28:20 PM - INFO:Iniciando pesquisa de nodrops
-01/06/2022 05:28:21 PM - INFO:Nodrops encontrados: 1, Cancl encontrados: 1, Nodrops possiveis: 0, total de cancelamentos efetuados: 0, quantidade de transações que não foram encontradas : 0
-01/06/2022 05:28:21 PM - INFO:Nodrops encontrados: 2, Cancl encontrados: 2, Nodrops possiveis: 0, total de cancelamentos efetuados: 0, quantidade de transações que não foram encontradas : 0
-01/06/2022 05:28:21 PM - INFO:Nodrops encontrados: 3, Cancl encontrados: 3, Nodrops possiveis: 0, total de cancelamentos efetuados: 0, quantidade de transações que não foram encontradas : 0
-01/06/2022 05:28:21 PM - INFO:Nodrops encontrados: 4, Cancl encontrados: 4, Nodrops possiveis: 0, total de cancelamentos efetuados: 0, quantidade de transações que não foram encontradas : 0
-01/06/2022 05:28:21 PM - INFO:Nodrops encontrados: 5, Cancl encontrados: 5, Nodrops possiveis: 0, total de cancelamentos efetuados: 0, quantidade de transações que não foram encontradas : 0
-01/06/2022 05:28:22 PM - INFO:Nodrops encontrados: 6, Cancl encontrados: 6, Nodrops possiveis: 0, total de cancelamentos efetuados: 0, quantidade de transações que não foram encontradas : 0
-01/06/2022 05:28:22 PM - INFO:Nodrops encontrados: 7, Cancl encontrados: 7, Nodrops possiveis: 0, total de cancelamentos efetuados: 0, quantidade de transações que não foram encontradas : 0
-01/06/2022 05:28:22 PM - INFO:Nodrops encontrados: 8, Cancl encontrados: 8, Nodrops possiveis: 0, total de cancelamentos efetuados: 0, quantidade de transações que não foram encontradas : 0
-01/06/2022 05:28:22 PM - INFO:Nodrops encontrados: 9, Cancl encontrados: 9, Nodrops possiveis: 0, total de cancelamentos efetuados: 0, quantidade de transações que não foram encontradas : 0
-01/06/2022 05:28:22 PM - INFO:Nodrops encontrados: 10, Cancl encontrados: 10, Nodrops possiveis: 0, total de cancelamentos efetuados: 0, quantidade de transações que não foram encontradas : 0
-01/06/2022 05:28:22 PM - INFO:Nodrops encontrados: 11, Cancl encontrados: 11, Nodrops possiveis: 0, total de cancelamentos efetuados: 0, quantidade de transações que não foram encontradas : 0
-01/06/2022 05:28:23 PM - INFO:Nodrops encontrados: 12, Cancl encontrados: 12, Nodrops possiveis: 0, total de cancelamentos efetuados: 0, quantidade de transações que não foram encontradas : 0
-01/06/2022 05:28:23 PM - INFO:Nodrops encontrados: 13, Cancl encontrados: 13, Nodrops possiveis: 0, total de cancelamentos efetuados: 0, quantidade de transações que não foram encontradas : 0
-01/06/2022 05:28:23 PM - INFO:Nodrops encontrados: 14, Cancl encontrados: 14, Nodrops possiveis: 0, total de cancelamentos efetuados: 0, quantidade de transações que não foram encontradas : 0
-01/06/2022 05:28:23 PM - INFO:Nodrops encontrados: 15, Cancl encontrados: 15, Nodrops possiveis: 0, total de cancelamentos efetuados: 0, quantidade de transações que não foram encontradas : 0
-01/06/2022 05:28:23 PM - INFO:Nodrops encontrados: 16, Cancl encontrados: 16, Nodrops possiveis: 0, total de cancelamentos efetuados: 0, quantidade de transações que não foram encontradas : 0
-01/06/2022 05:28:23 PM - INFO:Nodrops encontrados: 17, Cancl encontrados: 17, Nodrops possiveis: 0, total de cancelamentos efetuados: 0, quantidade de transações que não foram encontradas : 0
-01/06/2022 05:28:24 PM - INFO:Nodrops encontrados: 18, Cancl encontrados: 18, Nodrops possiveis: 0, total de cancelamentos efetuados: 0, quantidade de transações que não foram encontradas : 0
+06/06/2022 03:14:23 PM - INFO:conexão com o banco de dados efetuada com sucesso.
+06/06/2022 03:14:23 PM - INFO:Iniciando pesquisa de nodrops
+06/06/2022 03:14:36 PM - INFO:conexão com o banco de dados efetuada com sucesso.
+06/06/2022 03:14:36 PM - INFO:Iniciando pesquisa de nodrops
+06/06/2022 03:14:37 PM - INFO:transações de nodrop selecionadas com sucesso.
+06/06/2022 03:14:37 PM - INFO:Nodrops encontrados: 1, Cancl encontrados: 0, Nodrops possiveis: 1, total de cancelamentos efetuados: 1, quantidade de transações que não foram encontradas : 0
+06/06/2022 03:14:37 PM - INFO:transações de nodrop selecionadas com sucesso.
+06/06/2022 03:14:37 PM - INFO:Nodrops encontrados: 2, Cancl encontrados: 0, Nodrops possiveis: 2, total de cancelamentos efetuados: 2, quantidade de transações que não foram encontradas : 0
+06/06/2022 03:14:37 PM - INFO:transações de nodrop selecionadas com sucesso.
+06/06/2022 03:14:37 PM - INFO:Nodrops encontrados: 3, Cancl encontrados: 0, Nodrops possiveis: 3, total de cancelamentos efetuados: 2, quantidade de transações que não foram encontradas : 1
+06/06/2022 03:14:38 PM - INFO:transações de nodrop selecionadas com sucesso.
+06/06/2022 03:14:38 PM - INFO:Nodrops encontrados: 4, Cancl encontrados: 0, Nodrops possiveis: 4, total de cancelamentos efetuados: 3, quantidade de transações que não foram encontradas : 1
+06/06/2022 03:14:38 PM - INFO:transações de nodrop selecionadas com sucesso.
+06/06/2022 03:14:38 PM - INFO:Nodrops encontrados: 5, Cancl encontrados: 0, Nodrops possiveis: 5, total de cancelamentos efetuados: 4, quantidade de transações que não foram encontradas : 1
+06/06/2022 03:14:38 PM - INFO:transações de nodrop selecionadas com sucesso.
+06/06/2022 03:14:38 PM - INFO:Nodrops encontrados: 6, Cancl encontrados: 0, Nodrops possiveis: 6, total de cancelamentos efetuados: 5, quantidade de transações que não foram encontradas : 1
+06/06/2022 03:14:39 PM - INFO:transações de nodrop selecionadas com sucesso.
+06/06/2022 03:14:39 PM - INFO:Nodrops encontrados: 7, Cancl encontrados: 0, Nodrops possiveis: 7, total de cancelamentos efetuados: 6, quantidade de transações que não foram encontradas : 1
+06/06/2022 03:14:39 PM - INFO:transações de nodrop selecionadas com sucesso.
+06/06/2022 03:14:39 PM - INFO:Nodrops encontrados: 8, Cancl encontrados: 0, Nodrops possiveis: 8, total de cancelamentos efetuados: 7, quantidade de transações que não foram encontradas : 1
+06/06/2022 03:14:39 PM - INFO:transações de nodrop selecionadas com sucesso.
+06/06/2022 03:14:39 PM - INFO:Nodrops encontrados: 9, Cancl encontrados: 0, Nodrops possiveis: 9, total de cancelamentos efetuados: 8, quantidade de transações que não foram encontradas : 1
+06/06/2022 03:14:39 PM - INFO:transações de nodrop selecionadas com sucesso.
+06/06/2022 03:14:39 PM - INFO:Nodrops encontrados: 10, Cancl encontrados: 0, Nodrops possiveis: 10, total de cancelamentos efetuados: 9, quantidade de transações que não foram encontradas : 1
+06/06/2022 03:14:40 PM - INFO:transações de nodrop selecionadas com sucesso.
+06/06/2022 03:14:40 PM - INFO:Nodrops encontrados: 11, Cancl encontrados: 0, Nodrops possiveis: 11, total de cancelamentos efetuados: 10, quantidade de transações que não foram encontradas : 1
+06/06/2022 03:14:40 PM - INFO:transações de nodrop selecionadas com sucesso.
+06/06/2022 03:14:40 PM - INFO:Nodrops encontrados: 12, Cancl encontrados: 0, Nodrops possiveis: 12, total de cancelamentos efetuados: 11, quantidade de transações que não foram encontradas : 1
+06/06/2022 03:14:40 PM - INFO:transações de nodrop selecionadas com sucesso.
+06/06/2022 03:14:40 PM - INFO:Nodrops encontrados: 13, Cancl encontrados: 0, Nodrops possiveis: 13, total de cancelamentos efetuados: 12, quantidade de transações que não foram encontradas : 1
+06/06/2022 03:14:47 PM - INFO:conexão com o banco de dados efetuada com sucesso.
+06/06/2022 03:14:47 PM - INFO:Iniciando pesquisa de nodrops
+06/06/2022 03:14:48 PM - INFO:transações de nodrop selecionadas com sucesso.
+06/06/2022 03:14:48 PM - INFO:Nodrops encontrados: 1, Cancl encontrados: 0, Nodrops possiveis: 1, total de cancelamentos efetuados: 1, quantidade de transações que não foram encontradas : 0
+06/06/2022 03:14:48 PM - INFO:transações de nodrop selecionadas com sucesso.
+06/06/2022 03:14:48 PM - INFO:Nodrops encontrados: 2, Cancl encontrados: 0, Nodrops possiveis: 2, total de cancelamentos efetuados: 2, quantidade de transações que não foram encontradas : 0
+06/06/2022 03:14:48 PM - INFO:transações de nodrop selecionadas com sucesso.
+06/06/2022 03:14:48 PM - INFO:Nodrops encontrados: 3, Cancl encontrados: 0, Nodrops possiveis: 3, total de cancelamentos efetuados: 3, quantidade de transações que não foram encontradas : 0
+06/06/2022 03:14:49 PM - INFO:transações de nodrop selecionadas com sucesso.
+06/06/2022 03:14:49 PM - INFO:Nodrops encontrados: 4, Cancl encontrados: 0, Nodrops possiveis: 4, total de cancelamentos efetuados: 4, quantidade de transações que não foram encontradas : 0
+06/06/2022 03:14:49 PM - INFO:transações de nodrop selecionadas com sucesso.
+06/06/2022 03:14:49 PM - INFO:Nodrops encontrados: 5, Cancl encontrados: 0, Nodrops possiveis: 5, total de cancelamentos efetuados: 5, quantidade de transações que não foram encontradas : 0
+06/06/2022 03:14:49 PM - INFO:transações de nodrop selecionadas com sucesso.
+06/06/2022 03:14:49 PM - INFO:Nodrops encontrados: 6, Cancl encontrados: 0, Nodrops possiveis: 6, total de cancelamentos efetuados: 6, quantidade de transações que não foram encontradas : 0
+06/06/2022 03:14:50 PM - INFO:transações de nodrop selecionadas com sucesso.
+06/06/2022 03:14:50 PM - INFO:Nodrops encontrados: 7, Cancl encontrados: 0, Nodrops possiveis: 7, total de cancelamentos efetuados: 7, quantidade de transações que não foram encontradas : 0
+06/06/2022 03:14:50 PM - INFO:transações de nodrop selecionadas com sucesso.
+06/06/2022 03:14:50 PM - INFO:Nodrops encontrados: 8, Cancl encontrados: 0, Nodrops possiveis: 8, total de cancelamentos efetuados: 8, quantidade de transações que não foram encontradas : 0
+06/06/2022 03:14:50 PM - INFO:transações de nodrop selecionadas com sucesso.
+06/06/2022 03:14:50 PM - INFO:Nodrops encontrados: 9, Cancl encontrados: 0, Nodrops possiveis: 9, total de cancelamentos efetuados: 9, quantidade de transações que não foram encontradas : 0
+06/06/2022 03:14:56 PM - INFO:conexão com o banco de dados efetuada com sucesso.
+06/06/2022 03:14:56 PM - INFO:Iniciando pesquisa de nodrops
+06/06/2022 03:14:57 PM - INFO:Nodrops encontrados: 1, Cancl encontrados: 1, Nodrops possiveis: 0, total de cancelamentos efetuados: 0, quantidade de transações que não foram encontradas : 0
+06/06/2022 03:14:57 PM - INFO:Nodrops encontrados: 2, Cancl encontrados: 2, Nodrops possiveis: 0, total de cancelamentos efetuados: 0, quantidade de transações que não foram encontradas : 0
+06/06/2022 03:14:57 PM - INFO:Nodrops encontrados: 4, Cancl encontrados: 4, Nodrops possiveis: 0, total de cancelamentos efetuados: 0, quantidade de transações que não foram encontradas : 0
+06/06/2022 03:14:57 PM - INFO:Nodrops encontrados: 6, Cancl encontrados: 6, Nodrops possiveis: 0, total de cancelamentos efetuados: 0, quantidade de transações que não foram encontradas : 0
+06/06/2022 03:15:03 PM - INFO:conexão com o banco de dados efetuada com sucesso.
+06/06/2022 03:15:03 PM - INFO:Iniciando pesquisa de nodrops
+06/06/2022 03:15:04 PM - INFO:Nodrops encontrados: 1, Cancl encontrados: 1, Nodrops possiveis: 0, total de cancelamentos efetuados: 0, quantidade de transações que não foram encontradas : 0
+06/06/2022 03:15:04 PM - INFO:Nodrops encontrados: 3, Cancl encontrados: 3, Nodrops possiveis: 0, total de cancelamentos efetuados: 0, quantidade de transações que não foram encontradas : 0
+06/06/2022 03:15:04 PM - INFO:Nodrops encontrados: 4, Cancl encontrados: 4, Nodrops possiveis: 0, total de cancelamentos efetuados: 0, quantidade de transações que não foram encontradas : 0
+06/06/2022 03:15:05 PM - INFO:Nodrops encontrados: 5, Cancl encontrados: 5, Nodrops possiveis: 0, total de cancelamentos efetuados: 0, quantidade de transações que não foram encontradas : 0
+06/06/2022 03:15:05 PM - INFO:Nodrops encontrados: 6, Cancl encontrados: 6, Nodrops possiveis: 0, total de cancelamentos efetuados: 0, quantidade de transações que não foram encontradas : 0
+06/06/2022 03:15:05 PM - INFO:Nodrops encontrados: 7, Cancl encontrados: 7, Nodrops possiveis: 0, total de cancelamentos efetuados: 0, quantidade de transações que não foram encontradas : 0
+06/06/2022 03:15:05 PM - INFO:Nodrops encontrados: 8, Cancl encontrados: 8, Nodrops possiveis: 0, total de cancelamentos efetuados: 0, quantidade de transações que não foram encontradas : 0
+06/06/2022 03:15:05 PM - INFO:Nodrops encontrados: 9, Cancl encontrados: 9, Nodrops possiveis: 0, total de cancelamentos efetuados: 0, quantidade de transações que não foram encontradas : 0
+06/06/2022 03:15:05 PM - INFO:Nodrops encontrados: 10, Cancl encontrados: 10, Nodrops possiveis: 0, total de cancelamentos efetuados: 0, quantidade de transações que não foram encontradas : 0
+06/06/2022 03:15:05 PM - INFO:Nodrops encontrados: 11, Cancl encontrados: 11, Nodrops possiveis: 0, total de cancelamentos efetuados: 0, quantidade de transações que não foram encontradas : 0
+06/06/2022 03:15:06 PM - INFO:Nodrops encontrados: 12, Cancl encontrados: 12, Nodrops possiveis: 0, total de cancelamentos efetuados: 0, quantidade de transações que não foram encontradas : 0
+06/06/2022 03:15:06 PM - INFO:Nodrops encontrados: 13, Cancl encontrados: 13, Nodrops possiveis: 0, total de cancelamentos efetuados: 0, quantidade de transações que não foram encontradas : 0
+06/06/2022 03:15:06 PM - INFO:Nodrops encontrados: 14, Cancl encontrados: 14, Nodrops possiveis: 0, total de cancelamentos efetuados: 0, quantidade de transações que não foram encontradas : 0
+06/06/2022 03:15:06 PM - INFO:Nodrops encontrados: 15, Cancl encontrados: 15, Nodrops possiveis: 0, total de cancelamentos efetuados: 0, quantidade de transações que não foram encontradas : 0
+06/06/2022 03:15:06 PM - INFO:Nodrops encontrados: 16, Cancl encontrados: 16, Nodrops possiveis: 0, total de cancelamentos efetuados: 0, quantidade de transações que não foram encontradas : 0
+06/06/2022 03:15:07 PM - INFO:transações de nodrop selecionadas com sucesso.
+06/06/2022 03:15:07 PM - INFO:transações de nodrop selecionadas com sucesso.
+06/06/2022 03:15:07 PM - INFO:Nodrops encontrados: 18, Cancl encontrados: 16, Nodrops possiveis: 2, total de cancelamentos efetuados: 0, quantidade de transações que não foram encontradas : 2
+06/06/2022 03:15:13 PM - INFO:conexão com o banco de dados efetuada com sucesso.
+06/06/2022 03:15:13 PM - INFO:Iniciando pesquisa de nodrops
+06/06/2022 03:15:14 PM - INFO:transações de nodrop selecionadas com sucesso.
+06/06/2022 03:15:14 PM - INFO:Nodrops encontrados: 1, Cancl encontrados: 0, Nodrops possiveis: 1, total de cancelamentos efetuados: 1, quantidade de transações que não foram encontradas : 0
+06/06/2022 03:15:14 PM - INFO:transações de nodrop selecionadas com sucesso.
+06/06/2022 03:15:14 PM - INFO:Nodrops encontrados: 2, Cancl encontrados: 0, Nodrops possiveis: 2, total de cancelamentos efetuados: 2, quantidade de transações que não foram encontradas : 0
+06/06/2022 03:15:14 PM - INFO:transações de nodrop selecionadas com sucesso.
+06/06/2022 03:15:14 PM - INFO:Nodrops encontrados: 3, Cancl encontrados: 0, Nodrops possiveis: 3, total de cancelamentos efetuados: 3, quantidade de transações que não foram encontradas : 0
+06/06/2022 03:15:15 PM - INFO:transações de nodrop selecionadas com sucesso.
+06/06/2022 03:15:15 PM - INFO:Nodrops encontrados: 4, Cancl encontrados: 0, Nodrops possiveis: 4, total de cancelamentos efetuados: 4, quantidade de transações que não foram encontradas : 0
+06/06/2022 03:15:15 PM - INFO:transações de nodrop selecionadas com sucesso.
+06/06/2022 03:15:15 PM - INFO:transações de nodrop selecionadas com sucesso.
+06/06/2022 03:15:15 PM - INFO:Nodrops encontrados: 6, Cancl encontrados: 0, Nodrops possiveis: 6, total de cancelamentos efetuados: 6, quantidade de transações que não foram encontradas : 0
+06/06/2022 03:15:15 PM - INFO:transações de nodrop selecionadas com sucesso.
+06/06/2022 03:15:15 PM - INFO:Nodrops encontrados: 7, Cancl encontrados: 0, Nodrops possiveis: 7, total de cancelamentos efetuados: 7, quantidade de transações que não foram encontradas : 0
+06/06/2022 03:15:16 PM - INFO:transações de nodrop selecionadas com sucesso.
+06/06/2022 03:15:16 PM - INFO:Nodrops encontrados: 8, Cancl encontrados: 0, Nodrops possiveis: 8, total de cancelamentos efetuados: 8, quantidade de transações que não foram encontradas : 0
+06/06/2022 03:15:22 PM - INFO:conexão com o banco de dados efetuada com sucesso.
+06/06/2022 03:15:22 PM - INFO:Iniciando pesquisa de nodrops
+06/06/2022 03:15:28 PM - INFO:conexão com o banco de dados efetuada com sucesso.
+06/06/2022 03:15:28 PM - INFO:Iniciando pesquisa de nodrops
+06/06/2022 03:15:29 PM - INFO:transações de nodrop selecionadas com sucesso.
+06/06/2022 03:15:29 PM - INFO:Nodrops encontrados: 1, Cancl encontrados: 0, Nodrops possiveis: 1, total de cancelamentos efetuados: 1, quantidade de transações que não foram encontradas : 0

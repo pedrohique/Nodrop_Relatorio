@@ -35,6 +35,8 @@ class GetNoDropWorker:
         self.dict_cancl = {}  # dict de cancelamentos para relatorio
         self.dict_issue = {}  # dict de issues para relatorio
         self.dict_cancl_nomot = {}
+        self.dict_contagem = {}
+        self.nome_relat = str
 
         '''CNX DB'''
         server = config.get('dados_banco', 'server')
@@ -225,11 +227,11 @@ class GetNoDropWorker:
                 f'Nodrops encontrados: {self.soma_nodrops}, Cancl encontrados: {self.soma_cancelamentos}, '
                 f'Nodrops possiveis: {self.soma_trans_true}, total de cancelamentos efetuados: {self.soma_trans}, '
                 f'quantidade de transações que não foram encontradas : {self.soma_unfind}')
-            print(
-                f'Nodrops encontrados: {self.soma_nodrops}, Cancl encontrados: {self.soma_cancelamentos}, '
-                f'Nodrops possiveis: {self.soma_trans_true}, total de cancelamentos efetuados: {self.soma_trans}, '
-                f'quantidade de transações que não foram encontradas : {self.soma_unfind}')
-            print('----------------------------------------------------------')
+            # print(
+                # f'Nodrops encontrados: {self.soma_nodrops}, Cancl encontrados: {self.soma_cancelamentos}, '
+                # f'Nodrops possiveis: {self.soma_trans_true}, total de cancelamentos efetuados: {self.soma_trans}, '
+                # f'quantidade de transações que não foram encontradas : {self.soma_unfind}')
+            # print('----------------------------------------------------------')
 
     '''Aqui pra baixo começa o desenvolvimento dos relatorios'''
 
@@ -261,16 +263,30 @@ class GetNoDropWorker:
     def list_trans(self):
         """Busca as transações de issues no banco"""
         tuple_cribs = tuple(self.cribs)
-        self.cursor.execute(f"select t.transnumber, s.crib, s.bin,"
-                            f" t.item, e.ID, t.Transdate, t.quantity, t.TypeDescription,"
-                            f" e.User1, e.User2, t.binqty from trans t with(nolock)"
-                            f" join EMPLOYEE e (nolock) on t.IssuedTo = e.ID "
-                            f"join INVENTRY  i (nolock) on i.ItemNumber = t.Item "
-                            f"join STATION s (nolock) on s.CribBin = t.CribBin "
-                            f"where TypeDescription = 'ISSUE' and status IS NULL "
-                            f"and transdate BETWEEN CONVERT(datetime, '{self.ontem}T00:00:00') "
-                            f"AND CONVERT(datetime, '{self.ontem}T23:59:59')"
-                            f" and t.Crib in {tuple_cribs}")
+        if len(tuple_cribs) > 1:
+            self.cursor.execute(f"select t.transnumber, s.crib, s.bin,"
+                                f" t.item, e.ID, t.Transdate, t.quantity, t.TypeDescription,"
+                                f" e.User1, e.User2, t.binqty from trans t with(nolock)"
+                                f" join EMPLOYEE e (nolock) on t.IssuedTo = e.ID "
+                                f"join INVENTRY  i (nolock) on i.ItemNumber = t.Item "
+                                f"join STATION s (nolock) on s.CribBin = t.CribBin "
+                                f"where TypeDescription = 'ISSUE' and status IS NULL "
+                                f"and transdate BETWEEN CONVERT(datetime, '{self.ontem}T00:00:00') "
+                                f"AND CONVERT(datetime, '{self.ontem}T23:59:59')"
+                                f" and t.Crib in {tuple_cribs}")
+        else:
+            self.cursor.execute(f"select t.transnumber, s.crib, s.bin,"
+                                f" t.item, e.ID, t.Transdate, t.quantity, t.TypeDescription,"
+                                f" e.User1, e.User2, t.binqty from trans t with(nolock)"
+                                f" join EMPLOYEE e (nolock) on t.IssuedTo = e.ID "
+                                f"join INVENTRY  i (nolock) on i.ItemNumber = t.Item "
+                                f"join STATION s (nolock) on s.CribBin = t.CribBin "
+                                f"where TypeDescription = 'ISSUE' and status IS NULL "
+                                f"and transdate BETWEEN CONVERT(datetime, '{self.ontem}T00:00:00') "
+                                f"AND CONVERT(datetime, '{self.ontem}T23:59:59')"
+                                f" and t.Crib = {tuple_cribs[0]}")
+
+
         trans_listing = self.cursor.fetchall()
         for trans in trans_listing:
             '''adiciona a transação no dicionario'''
@@ -282,10 +298,11 @@ class GetNoDropWorker:
             Transdate = trans[5]
             quantity = trans[6]
             TypeDescription = trans[7].replace(' ', '')
-            user1 = trans[8].replace(' ', '')
+
+            user1 = trans[8]
             if user1 == 'None':
                 user1 = 'NA'
-            user2 = trans[9].replace(' ', '')
+            user2 = trans[9]
             if user2 == 'None':
                 user2 = 'NA'
             binqty = trans[10]
@@ -295,16 +312,29 @@ class GetNoDropWorker:
     def busca_cancl(self):
         """Busca as transações de cancl sem motivo aparente"""
         tuple_cribs = tuple(self.cribs)
-        self.cursor.execute(f"select t.transnumber, s.crib, s.bin,"
-                            f" t.item, e.ID, t.Transdate, t.quantity, t.TypeDescription,"
-                            f" e.User1, e.User2, t.binqty from trans t with(nolock)"
-                            f" join EMPLOYEE e (nolock) on t.IssuedTo = e.ID "
-                            f"join INVENTRY  i (nolock) on i.ItemNumber = t.Item "
-                            f"join STATION s (nolock) on s.CribBin = t.CribBin "
-                            f"where TypeDescription = 'CANCL' "
-                            f"and transdate BETWEEN CONVERT(datetime, '{self.ontem}T00:00:00') "  # {self.ontem}
-                            f"AND CONVERT(datetime, '{self.ontem}T23:59:59')"
-                            f" and t.Crib in {tuple_cribs}")
+        if len(tuple_cribs) > 1:
+            self.cursor.execute(f"select t.transnumber, s.crib, s.bin,"
+                                f" t.item, e.ID, t.Transdate, t.quantity, t.TypeDescription,"
+                                f" e.User1, e.User2, t.binqty from trans t with(nolock)"
+                                f" join EMPLOYEE e (nolock) on t.IssuedTo = e.ID "
+                                f"join INVENTRY  i (nolock) on i.ItemNumber = t.Item "
+                                f"join STATION s (nolock) on s.CribBin = t.CribBin "
+                                f"where TypeDescription = 'CANCL' "
+                                f"and transdate BETWEEN CONVERT(datetime, '{self.ontem}T00:00:00') "  # {self.ontem}
+                                f"AND CONVERT(datetime, '{self.ontem}T23:59:59')"
+                                f" and t.Crib in {tuple_cribs}")
+        else:
+            self.cursor.execute(f"select t.transnumber, s.crib, s.bin,"
+                                f" t.item, e.ID, t.Transdate, t.quantity, t.TypeDescription,"
+                                f" e.User1, e.User2, t.binqty from trans t with(nolock)"
+                                f" join EMPLOYEE e (nolock) on t.IssuedTo = e.ID "
+                                f"join INVENTRY  i (nolock) on i.ItemNumber = t.Item "
+                                f"join STATION s (nolock) on s.CribBin = t.CribBin "
+                                f"where TypeDescription = 'CANCL' "
+                                f"and transdate BETWEEN CONVERT(datetime, '{self.ontem}T00:00:00') "  # {self.ontem}
+                                f"AND CONVERT(datetime, '{self.ontem}T23:59:59')"
+                                f" and t.Crib = {tuple_cribs[0]}")
+
         trans_cancl = self.cursor.fetchall()
         for cancl in trans_cancl:
             if cancl[0] not in self.dict_cancl.keys():
@@ -325,7 +355,6 @@ class GetNoDropWorker:
                 binqty = cancl[10]
                 self.dict_cancl_nomot[transnumber] = [str(crib), bin, item, employee, str(Transdate), str(quantity),
                                                       TypeDescription, user1, user2, binqty]
-        print(self.dict_cancl_nomot)
 
     def trata_relat(self):
         def altera_dados():
@@ -351,14 +380,15 @@ class GetNoDropWorker:
         colunas = ['crib', 'bin', 'item', 'employee', 'Transdate', 'quantity', 'TypeDescription', 'Centro de Custo',
                    'Função', 'Binquantity', 'resultado']
         df = pd.DataFrame.from_dict(self.dict_geral, orient='index', columns=colunas)
-        df.to_excel(f'teste.xlsx')
+        self.nome_relat = f'RelatorioEspFluxo{self.ontem}.xlsx'
+        df.to_excel(self.nome_relat)
 
     def count_trans(self):
         issue_qtd = int()
         nodrop_qtd = int()
         cancel_qtd = int()
         cancelnodrop_qtd = int()
-        dict_results = {}
+
         for trans in self.dict_geral:
             tipo = self.dict_geral[trans][-1]
             qtd = int(self.dict_geral[trans][-6])
@@ -372,7 +402,9 @@ class GetNoDropWorker:
                 cancel_qtd += qtd
             elif tipo == 'CANCELADO POR NAO QUEDA':
                 cancelnodrop_qtd += qtd
-        print(issue_qtd, nodrop_qtd, cancel_qtd, cancelnodrop_qtd)
+
+        self.dict_contagem = {'ENTREGUE': issue_qtd, 'NAO QUEDA': nodrop_qtd, 'CANCELADO': cancel_qtd, 'CANCELADO POR NAO QUEDA':cancelnodrop_qtd}
+        #print(self.dict_contagem)
 
 
 class GetNoDrop(GetNoDropWorker):
