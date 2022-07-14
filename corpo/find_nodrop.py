@@ -71,7 +71,7 @@ class GetNoDropWorker:
         self.cursor.execute(
             f"select EventLogDate, EventLogMessage from EventLog where EventLogKey is null and "
             f"EventLogProgramName = 'CribMaster' and EventLogDate "
-            f"BETWEEN CONVERT(datetime, '{self.anteontem}T23:00:00') AND "
+            f"BETWEEN CONVERT(datetime, '{self.ontem}T00:00:00') AND "
             f"CONVERT(datetime, '{self.ontem}T23:59:59');")
         nodrops = self.cursor.fetchall()  # pega todos os nodrops do banco
 
@@ -237,6 +237,8 @@ class GetNoDropWorker:
 
     def limpa_cancl(self):
         """Trata as informações de cancels criadas pela função count cancel dentro do metodo get_trans_nodrop"""
+        logging.info('Tratando as informações de cancl')
+
         for cancl in self.list_cancel:
             for canc in cancl:
                 # print(cancl[0][0], cancl[0][1], cancl[0][2], cancl[0][3],
@@ -262,6 +264,7 @@ class GetNoDropWorker:
 
     def list_trans(self):
         """Busca as transações de issues no banco"""
+        logging.info('Buscando Issues')
         tuple_cribs = tuple(self.cribs)
         if len(tuple_cribs) > 1:
             self.cursor.execute(f"select t.transnumber, s.crib, s.bin,"
@@ -311,6 +314,8 @@ class GetNoDropWorker:
 
     def busca_cancl(self):
         """Busca as transações de cancl sem motivo aparente"""
+        logging.info('buscando transções cancl sem motivo')
+
         tuple_cribs = tuple(self.cribs)
         if len(tuple_cribs) > 1:
             self.cursor.execute(f"select t.transnumber, s.crib, s.bin,"
@@ -357,6 +362,7 @@ class GetNoDropWorker:
                                                       TypeDescription, user1, user2, binqty]
 
     def trata_relat(self):
+        logging.info('tratando dados, adicionando legenda')
         def altera_dados():
             for trans in self.dict_nodrops.keys():
                 self.dict_nodrops[trans].append('NAO QUEDA')
@@ -377,6 +383,7 @@ class GetNoDropWorker:
         self.dict_geral.update(self.dict_cancl_nomot)
 
     def cria_relat(self):
+        logging.info('criando arquivo de envio')
         colunas = ['crib', 'bin', 'item', 'employee', 'Transdate', 'quantity', 'TypeDescription', 'Centro de Custo',
                    'Função', 'Binquantity', 'resultado']
         df = pd.DataFrame.from_dict(self.dict_geral, orient='index', columns=colunas)
@@ -384,6 +391,7 @@ class GetNoDropWorker:
         df.to_excel(self.nome_relat)
 
     def count_trans(self):
+        logging.info('contando dados')
         issue_qtd = int()
         nodrop_qtd = int()
         cancel_qtd = int()
@@ -404,7 +412,6 @@ class GetNoDropWorker:
                 cancelnodrop_qtd += qtd
 
         self.dict_contagem = {'ENTREGUE': issue_qtd, 'NAO QUEDA': nodrop_qtd, 'CANCELADO': cancel_qtd, 'CANCELADO POR NAO QUEDA':cancelnodrop_qtd}
-        #print(self.dict_contagem)
 
 
 class GetNoDrop(GetNoDropWorker):
@@ -415,6 +422,7 @@ class GetNoDrop(GetNoDropWorker):
 
 
 class RelatorioNodrop(GetNoDropWorker):
+    logging.info('iniciando tread')
     def __init__(self, cribs, ontem, anteontem):
         super().__init__(cribs, ontem, anteontem)
         self.select_nodrops()

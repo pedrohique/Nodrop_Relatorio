@@ -1,5 +1,5 @@
 # encoding: utf-8
-import cryptocode #descriptografa a senho do config file
+import cryptocode  # descriptografa a senho do config file
 import configparser
 import smtplib
 from email.mime.multipart import MIMEMultipart
@@ -7,15 +7,15 @@ from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
 from bs4 import BeautifulSoup
-from datetime import  datetime
+from datetime import datetime
 
 config = configparser.ConfigParser()
 config.read('config.ini')
 
+
 class SendMail:
 
     def __init__(self, emails, data, results, nome_empresa, relat_name):
-        '''pega a chave do password e desencrypta'''
         key = 'i9brgroup'
         password_cript = config.get('enviar_email', 'password')
         password = cryptocode.decrypt(password_cript, key)
@@ -26,7 +26,7 @@ class SendMail:
         self.user = config.get('enviar_email', 'user')
         self.password = password
         self.data = data
-        self.results = results #dicionario com os resultados
+        self.results = results  # dicionario com os resultados
         self.nome_empresa = nome_empresa
         self.relat_name = relat_name
 
@@ -52,12 +52,9 @@ class SendMail:
             self.soup.nome.replace_with(str(self.nome_empresa))
             self.soup = self.soup.decode()
 
-
-
     def connect(self):  # conect
         self.con = smtplib.SMTP(self.host, self.port)
         self.con.login(self.user, self.password)
-
 
     def body(self):  # edita o email
         message = self.soup
@@ -67,7 +64,6 @@ class SendMail:
                 self.emails)  # o problema de passar emails em lista é o cabeçalho que só aceita strings
         self.email_msg['Subject'] = f'RELATORIO ESPECIAL DE FLUXO - {self.nome_empresa} - {self.data}'
         self.email_msg.attach(MIMEText(message, 'html'))
-
 
     def send(self):  # envia o email
         filename = self.relat_name  # falta renomear o arquivo automaticamente
