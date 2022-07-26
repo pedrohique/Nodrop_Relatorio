@@ -1,9 +1,8 @@
-# Nodrop_NOVO
+# Nodrop_Relatorio
 
-As maquinas da CribMaster Geração 3 quando um item
-retirado não cai o item precisa ser cancelado manualmente,
-o sistema apenas gera um aviso indicando qual transação precisa ser cancelada.
+Esse sistema gera um relatorio de consumo detalhado com informações de transações canceladas
+por motivo de não queda, transações canceladas sem motivo evidente transações que deveriam
+ter sido canceladas por não quedas, alem de o consumo diario detalhado.
 
-O sistema localiza essa transação no banco de dados e efetua o cancelamento da mesma,
-para que isso fosse realizado de modo seguro utilizamos um metodo de monitoramento de tudo que era
-alterado no banco de dados quando um cancelamento manual era realizado.
+Enviando um relatorio via email.
+
